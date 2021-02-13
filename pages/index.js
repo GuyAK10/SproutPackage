@@ -1,65 +1,122 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { Card, Button, Modal, Dropdown, DropdownButton,Nav } from 'react-bootstrap'
+import React, { useState } from 'react'
+import Router from 'next/router'
 
-export default function Home() {
+const index = () => {
+  const [modalShow, setModalShow] = useState(false);
+  const [packageSubject, setPackageSubject] = useState("Choose Package")
+
+  const fixPackage = (e) => {
+    setPackageSubject(e)
+  }
+
+  const createPackage = () => {
+    Router.push(`/${packageSubject}`)
+  }
+
+  const CreatePackageTable = (props) => {
+    return (
+      <Modal
+        {...props}
+        size="xl"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Start Package
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body >
+          <h4>Subject Name</h4>
+          <div className="packageSubject">
+            <DropdownButton id="dropdown-basic-button" title={packageSubject} onSelect={(e) => { fixPackage(e) }}>
+              <Dropdown.Item eventKey="technology" >technology</Dropdown.Item>
+              <Dropdown.Item eventKey="financial" >financial</Dropdown.Item>
+              <Dropdown.Item eventKey="marketing" >marketing</Dropdown.Item>
+            </DropdownButton>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={createPackage}>Create</Button>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Sprout Package</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <main className="main">
+        <div className="package-container">
+          <Card style={{ width: '20rem' }}>
+            <Card.Img variant="top" src="/background/financial.jpg" />
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Nav>
+              <Nav.Item>
+                  <Nav.Link onClick={() => setModalShow(true)}>Add Package</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link  href="/showFinancial">Show Package</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: '20rem' }}>
+            <Card.Img variant="top" src="/background/technology.jpg" />
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Nav>
+              <Nav.Item>
+                  <Nav.Link onClick={() => setModalShow(true)}>Add Package</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link  href="/showTechnology">Show Package</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Card.Body>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          </Card>
+          <Card style={{ width: '20rem' }}>
+            <Card.Img variant="top" src="/background/marketing.jpg" />
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Nav>
+              <Nav.Item>
+                  <Nav.Link onClick={() => setModalShow(true)}>Add Package</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link  href="/showMarketing">Show Package</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Card.Body>
+          </Card>
+          <CreatePackageTable
+            show={modalShow}
+            
+            onHide={() => setModalShow(false)}
+          />
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
+export default index

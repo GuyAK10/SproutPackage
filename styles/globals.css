@@ -6,11 +6,47 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
 * {
   box-sizing: border-box;
+}
+
+.container{
+  margin: 1rem 0 1rem 0;
+  border: 1px solid black;
+}
+
+.package-container{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 5rem;
+  margin: 5rem 5rem 5rem 5rem;
+ 
+}
+
+.technology{
+  margin: 1rem 5rem 1rem 5rem; 
+}
+
+.technology-container{
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0 0 1rem 0;
+}
+
+.technology-menu{
+  border: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0 0 1rem 0;
+  align-items: center;
+}
+
+.technology-subject{
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.technology-title{
+  display: flex;
+  flex-flow: row nowrap;
 }
